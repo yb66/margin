@@ -1,0 +1,15 @@
+version: '3.2'
+services:
+  margin:
+    image: "e2e_margin"
+    ports:
+      - "8123:80"
+  cypress:
+    image: "cypress/included:4.4.0"
+    depends_on:
+      - margin
+    environment:
+      - CYPRESS_baseUrl=http://margin:80
+    working_dir: /e2e
+    volumes:
+      - ./:/e2e
